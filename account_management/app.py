@@ -39,6 +39,7 @@ def register():
     if request.method == 'POST':
         username = request.form.get("username")
         email = request.form.get("email")
+        access = request.form.get("access")
         password = request.form.get("password")
         confirm_password = request.form.get("confirm_password")
         if password == confirm_password:
@@ -46,7 +47,8 @@ def register():
             response = supabase.table('coba_akun').insert([{
                 'username': username,
                 'email': email,
-                'password': hashed_password
+                'password': hashed_password,
+                'access': access
             }]).execute()
             if response:
                 return render_template('register.html', status='Berhasil')
@@ -56,6 +58,14 @@ def register():
 @app.route('/logout', methods=["POST"])
 def logout():
     session.clear()
+    return redirect('/')
+
+@app.route('/delete', methods=["POST"])
+def delete():
+    if request.method == 'POST':
+        id = request.form.get('id')
+        response = supabase.table('coba_akun').delete().eq('id', id).execute()
+        return redirect('/')
     return redirect('/')
 
 if __name__ == '__main__':
