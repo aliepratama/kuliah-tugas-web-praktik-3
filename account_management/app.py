@@ -14,7 +14,10 @@ supabase = create_client(os.environ.get("SUPABASE_URL"), os.environ.get("SUPABAS
 @app.route('/', methods=["GET"])
 def home():
     if session.get('is_logged_in'):
-        return render_template('dashboard.html', username=session['username'])
+        if session.get('is_admin'):
+            users = supabase.table('coba_akun').select('*').execute()
+            return render_template('dashboard_admin.html', username=session['username'], users=users.data)
+        return render_template('dashboard_user.html', username=session['username'])
     return redirect(url_for('login'))
 
 @app.route('/login', methods=["GET", "POST"])
@@ -26,6 +29,7 @@ def login():
         if response and check_password_hash(response.data[0]['password'], password):
             session['is_logged_in'] = True
             session['username'] = response.data[0]['username']
+            session['is_admin'] = response.data[0]['access'] == 'admin'
             return render_template('login.html', status='Berhasil')
         return render_template('login.html', status='Gagal')
     return render_template('login.html')
