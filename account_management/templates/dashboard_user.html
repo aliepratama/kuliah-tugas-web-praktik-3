@@ -9,10 +9,8 @@
 </head>
 <body>
     {% include 'partials/navbar_dashboard.html' %}
-    <h1>Dashboard</h1>
-    <p>Selamat Datang {{ username }}</p>
-    <form action="/logout" method="post">
-        <button type="submit">Logout</button>
-    </form>
+    {% with username=username %}
+        {% include 'partials/header_user.html' %}
+    {% endwith %}
 </body>
 </html>

@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
 </head>
 <body>
-    {% include 'partials/navbar_dashboard.html' %}
+    {% with access='Admin' %}
+        {% include 'partials/navbar_dashboard.html' %}
+    {% endwith %}
     <h1>Dashboard</h1>
     <p>Selamat Datang {{ username }}</p>
     <form action="/logout" method="post">
