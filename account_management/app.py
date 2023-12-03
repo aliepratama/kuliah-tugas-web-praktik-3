@@ -26,11 +26,12 @@ def login():
         email = request.form.get("email")
         password = request.form.get("password")
         response = supabase.table('coba_akun').select('*').eq('email', email).execute()
-        if response and check_password_hash(response.data[0]['password'], password):
-            session['is_logged_in'] = True
-            session['username'] = response.data[0]['username']
-            session['is_admin'] = response.data[0]['access'] == 'admin'
-            return render_template('login.html', status='Berhasil')
+        if len(response.data) > 0:
+            if check_password_hash(response.data[0]['password'], password):
+                session['is_logged_in'] = True
+                session['username'] = response.data[0]['username']
+                session['is_admin'] = response.data[0]['access'] == 'admin'
+                return render_template('login.html', status='Berhasil')
         return render_template('login.html', status='Gagal')
     return render_template('login.html')
 

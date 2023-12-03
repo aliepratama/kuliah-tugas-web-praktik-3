@@ -9,18 +9,8 @@
 </head>
 <body>
     {% include 'partials/navbar_home.html' %}
-    <form action="/register" method="post">
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username">
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email">
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password">
-        <label for="confirm_password">Confirm Password</label>
-        <input type="password" name="confirm_password" id="confirm_password">
-        <input type="hidden" name="access" value="user">
-        <button type="submit">Register</button>
-    </form>
-    <a href="/login">Already have an account?</a>
+    {% with status=status %}
+        {% include 'partials/register_form.html' %}
+    {% endwith %}
 </body>
 </html>

@@ -9,23 +9,8 @@
 </head>
 <body>
     {% include 'partials/navbar_home.html' %}
-    <p>Status: {{ status }}</p>
-    <form action="/login" method="post">
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email">
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password">
-        <button type="submit">Login</button>
-    </form>
-    <a href="/register">Don't have an account yet?</a>
-    <script>
-        const status = '{{ status }}';
-        if(status == 'Berhasil'){
-            setTimeout(() => {
-                window.location.href = '/';
-            }, 1000);
-        }
-    </script>
-    <script src="../../node_modules/preline/dist/preline.js"></script>
+    {% with status=status %}
+        {% include 'partials/login_form.html' %}
+    {% endwith %}
 </body>
 </html>

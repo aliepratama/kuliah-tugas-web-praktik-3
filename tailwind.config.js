@@ -6,12 +6,13 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'sans': ['Satoshi-Regular', 'system-ui'],
+        'sans': ['Satoshi', 'system-ui'],
       }
     },
   },
   plugins: [
     require('preline/plugin'),
   ],
+  darkMode: 'class',
 }
 
