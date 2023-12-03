@@ -15,9 +15,25 @@ supabase = create_client(os.environ.get("SUPABASE_URL"), os.environ.get("SUPABAS
 def home():
     if session.get('is_logged_in'):
         if session.get('is_admin'):
-            users = supabase.table('coba_akun').select('*').execute()
-            return render_template('dashboard_admin.html', username=session['username'], users=users.data)
+            return redirect('/admin/list')
         return render_template('dashboard_user.html', username=session['username'])
+    return redirect(url_for('login'))
+
+@app.route('/admin/list', methods=["GET"])
+def admin_list():
+    if session.get('is_logged_in'):
+        if session.get('is_admin'):
+            users = supabase.table('coba_akun').select('*').execute()
+            return render_template('dashboard_admin.html', page='list', username=session['username'], users=users.data)
+        return redirect('/')
+    return redirect(url_for('login'))
+
+@app.route('/admin/register', methods=["GET"])
+def admin_register():
+    if session.get('is_logged_in'):
+        if session.get('is_admin'):
+            return render_template('dashboard_admin.html', page='register', username=session['username'])
+        return redirect('/')
     return redirect(url_for('login'))
 
 @app.route('/login', methods=["GET", "POST"])
@@ -52,6 +68,8 @@ def register():
                 'access': access
             }]).execute()
             if response:
+                if access == 'admin':
+                    return render_template('dashboard_admin.html', status='Berhasil')
                 return render_template('register.html', status='Berhasil')
         return render_template('register.html', status='Gagal')
     return render_template('register.html')

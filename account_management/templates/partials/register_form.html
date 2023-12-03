@@ -6,13 +6,17 @@
         <!-- Card -->
         <div class="p-4 sm:p-7 flex flex-col bg-white rounded-2xl shadow-lg dark:bg-slate-900">
           <div class="text-center">
-            <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">Register Account</h1>
-            <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
-              Sudah memiliki akun?
-              <a href="/login" class="text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
-                Login disini
-              </a>
-            </p>
+            {% if access == 'Admin' %}
+              <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">Register Admin</h1>
+            {% else %}
+              <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">Register Account</h1>
+              <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                Sudah memiliki akun?
+                <a href="/login" class="text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                  Login disini
+                </a>
+              </p>
+            {% endif %}
           </div>
             <!-- Grid -->
             <div class="mt-5 flex flex-col gap-4 min-w-[400px]">
@@ -180,7 +184,11 @@
               </div>
             </div>
             <!-- End Checkbox -->
-            <input type="hidden" name="access" value="user">
+            {% if access == 'Admin' %}
+              <input type="hidden" name="access" value="admin">
+            {% else %}
+              <input type="hidden" name="access" value="user">
+            {% endif %}
             <div class="mt-5">
               <button type="submit" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">Register</button>
             </div>
@@ -193,9 +201,14 @@
 </div>
   <script>
     const status = '{{ status }}';
+    const access = '{{ access }}';
     if(status == 'Berhasil'){
         setTimeout(() => {
-            window.location.href = '/login';
+            if(access == 'Admin'){
+                window.location.href = '/admin/list';
+              }else{
+                window.location.href = '/login';
+            }
         }, 1000);
     }
     status !== '' ? alert('{{ status }}') : null;

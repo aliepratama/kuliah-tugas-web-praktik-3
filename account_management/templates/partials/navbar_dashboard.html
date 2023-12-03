@@ -15,8 +15,8 @@
       {% if access == 'Admin' %}
           <div id="navbar-alignment" class="sm:justify-center hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:flex">
             <div class="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:mt-0 sm:ps-5">
-              <a class="font-medium text-blue-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#" aria-current="page">Lihat Semua User</a>
-              <a class="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">Buat Admin Baru</a>
+              <a class="font-medium {% if page == 'list' %}text-blue-500{% else %}text-gray-600{% endif %} dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="/admin/list" aria-current="page">Lihat Semua User</a>
+              <a class="font-medium {% if page == 'register' %}text-blue-500{% else %}text-gray-600{% endif %} hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="/admin/register">Buat Admin Baru</a>
             </div>
           </div>
       {% endif %}
