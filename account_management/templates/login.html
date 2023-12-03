@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
 </head>
 <body>
-    {% include 'partials/navbar.html' %}
+    {% include 'partials/navbar_home.html' %}
     <p>Status: {{ status }}</p>
     <form action="/login" method="post">
         <label for="email">Email</label>

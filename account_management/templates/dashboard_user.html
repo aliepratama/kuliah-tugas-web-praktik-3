@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Management</title>
+    <link href="https://fonts.cdnfonts.com/css/satoshi" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
 </head>
 <body>
+    {% include 'partials/navbar_dashboard.html' %}
     <h1>Dashboard</h1>
     <p>Selamat Datang {{ username }}</p>
     <form action="/logout" method="post">
