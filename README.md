@@ -15,7 +15,7 @@ menggunakan komunikasi REST API yang ditangani oleh axios untuk mempermudah
 fetching data. Untuk tampilan saya menggunakan framework TailwindCSS. Serta
 database yang saya gunakan menggunakan postgreSQL.
 
-## Struktur Aplikasi
+## Struktur Database
 
 ![image](https://github.com/aliepratama/kuliah-tugas-web-praktik-3/assets/102345023/8b9e5837-2375-4097-adc4-16fbff65171b)
 
